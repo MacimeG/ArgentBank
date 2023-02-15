@@ -3,12 +3,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
 import Home from './pages/Home.jsx';
 import SignIn from './pages/SignIn.jsx';
-// import store from './store';
-// import { Provider } from 'react-redux';
+
 
 function App() {
   return (
-    // <Provider store= {store}>
     <div className="App">
       <BrowserRouter>
         <Routes>
