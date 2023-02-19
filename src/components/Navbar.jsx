@@ -1,8 +1,19 @@
+import { useState } from "react";
+import { useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
+import { DATAUSER } from "../store";
 import argentBankLogo from '../assets/argentBankLogo.png'
+import { userFetchData } from "../utils/login";
 
 
 export default function Navbar(){
+  // const token = localStorage.getItem('token')
+  // const dispatch = useDispatch()
+
+    // userFetchData(token).then(response => response.json()).then(data => {
+    //   dispatch(DATAUSER(setUserData(data.body)))
+    // })
+    // console.log(userData)
     return(
         //changé les balise <a> par <link>
         <nav className="main-nav">
@@ -24,4 +35,5 @@ export default function Navbar(){
         </div>
       </nav>
     )
+
 }

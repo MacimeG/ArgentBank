@@ -14,6 +14,13 @@ export const AUTHENTICATED = (remember, token) => ({
     type: 'AUTHENTICATED',
     payload: { remember, token },
 })
+// une action pour les data de l'user.
+export const DATAUSER = (user, token) => ({
+    type: "DATAUSER",
+    payload: {user, token}
+})
+
+
 // le reducer, qui prends le state, et une action (qu'il ne connais pas a l'avance)
 function reducer(state = initialState, action) {
     if (action.type === 'AUTHENTICATED') {
@@ -24,6 +31,15 @@ function reducer(state = initialState, action) {
         remember: action.payload.remember,
         token: action.payload.token,
       }
+    }
+    if(action.type === "DATAUSER"){
+        return{
+            ...state,
+            authChecked: true,
+            loggedIn: true,
+            user: action.payload.user,
+            token: action.payload.token
+        }
     }
     return state
   }

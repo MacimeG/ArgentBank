@@ -5,26 +5,34 @@ import { login } from "../utils/login";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { AUTHENTICATED } from "../store";
+import { useNavigate } from "react-router-dom";
 
 export default function SignIn(){
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  // const [rememberMe, setRemember]= useState(false)
-
+  const [rememberMe, setRemember]= useState(false)
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
 
-
-  console.log("email",email)
-  console.log("password", password)
-
   const handleSubmit = (e)=>{
     e.preventDefault()
+    setRemember(e.target.checked)
+
     login(email, password).then(response => response.json()).then(response => {
-      dispatch(AUTHENTICATED(false, response.body.token))
+      dispatch(AUTHENTICATED(rememberMe, response.body.token))
+      localStorage.setItem("token",response.body.token)
+
+      if(rememberMe === true){
+        localStorage.setItem("token",response.body.token)
+        localStorage.setItem("email",email)
+      }
+      if(response.body.token){
+        navigate('/Profile')
+
+      }
     })
   }
-
   return(
     <div>
       <Navbar/>
@@ -42,10 +50,9 @@ export default function SignIn(){
               <input type="password" id="password" autoComplete="off" onChange={(e)=> setPassword(e.target.value)}/>
             </div>
             <div className="input-remember">
-              <input type="checkbox" id="remember-me" /><label htmlFor="remember-me"
-              >Remember me</label>
+              <input type="checkbox" id="remember-me" value={rememberMe}  onChange={(e)=> setRemember(e.target.checked)} /><label htmlFor="remember-me"
+            >Remember me</label>
             </div>
-            {/* <Link className="sign-in-button" to="/SignIn">Sign In</Link> */}
             <button className="sign-in-button" to="/SignIn">Sign In</button>
           </form>
         </section>

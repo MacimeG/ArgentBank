@@ -1,0 +1,1 @@
+// mettre ici le code en rapport avec le localStorage
