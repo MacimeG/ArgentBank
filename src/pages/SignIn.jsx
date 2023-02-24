@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux'
-import { login } from "../utils/login";
+import { login } from "../utils/services";
 
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { AUTHENTICATED } from "../store";
 import { useNavigate } from "react-router-dom";
+
 
 export default function SignIn(){
   const [email, setEmail] = useState('')
@@ -13,7 +14,11 @@ export default function SignIn(){
   const [rememberMe, setRemember]= useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
+  const token = localStorage.getItem('token')
+  
+  if(token){
+    navigate('/Profile')
+  }
 
   const handleSubmit = (e)=>{
     e.preventDefault()
@@ -21,18 +26,15 @@ export default function SignIn(){
 
     login(email, password).then(response => response.json()).then(response => {
       dispatch(AUTHENTICATED(rememberMe, response.body.token))
-      localStorage.setItem("token",response.body.token)
-
+      
       if(rememberMe === true){
         localStorage.setItem("token",response.body.token)
         localStorage.setItem("email",email)
       }
-      if(response.body.token){
-        navigate('/Profile')
-
-      }
+      navigate('/Profile')
     })
   }
+
   return(
     <div>
       <Navbar/>

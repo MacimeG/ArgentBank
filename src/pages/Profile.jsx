@@ -1,45 +1,49 @@
-// import { useState } from "react";
+
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { userFetchData } from "../utils/login";
+import { userFetchData } from "../utils/services";
 import { DATAUSER } from "../store";
 import { useDispatch } from 'react-redux'
 import { useState } from "react";
-import React, { useEffect } from "react";
-
- function FetchData () {
-     const dispatch = useDispatch()
-    useEffect(()=>{
-
-        const token = localStorage.getItem('token')
-    
-        const response =  userFetchData(token).then(response => response.json()).then(data => data.body)
-        
-        const data = dispatch(DATAUSER(response, token))
-        console.log(data.payload.user)
-    })
-}
+import { store } from "../store";
 
 
 export default function Profile(){
-    // const [loading , setLoading] = useState(true)
-    const userData = FetchData()
-    console.log(userData)
-    // const token = localStorage.getItem('token')
-    // const dispatch = useDispatch()
-    // const [userData, setUserData] = useState([])
-    
-    // const response = userFetchData(token).then(response => response.json()).then(data => data.body)
-    
-    // const data = dispatch(DATAUSER(response, token))
-    // console.log(data.payload.user)
-   
+    const token = localStorage.getItem('token')
+
+    const dispatch = useDispatch()
+    const [userData, setUserData] = useState()
+    const [isEdit, setIsEdit] = useState(false)
+
+    setIsEdit(false)
+    console.log(isEdit)
+    const state = store.getState()
+
+    if(state.token){
+        userFetchData(state.token).then(response => response.json())
+        .then(data => {
+            dispatch(DATAUSER(data.body)); 
+            setUserData(data.body)
+        })
+
+    }
+    // else if(token){
+    //     userFetchData(token).then(response => response.json())
+    //     .then(data => {
+    //         dispatch(DATAUSER(data.body)); 
+    //         return setUserData(data.body)
+    //     })
+    // }
+
+
+    // console.log(userData)
+
         return(
             <div>
             <Navbar/>
             <main className="main bg-dark">
       <div className="header">
-        <h1>Welcome back<br />Tony Jarvis!</h1>
+        <h1>Welcome back<br />{userData?.firstName} {userData?.lastName} !</h1>
         <button className="edit-button">Edit Name</button>
       </div>
       <h2 className="sr-only">Accounts</h2>

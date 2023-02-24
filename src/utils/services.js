@@ -19,16 +19,29 @@ export async function userFetchData(token){
           Authorization: `Bearer ${token}`,
         },
     }
-    try{
-        return await fetch("http://localhost:3001/api/v1/user/profile",
-        requestOptions)
+    return await fetch("http://localhost:3001/api/v1/user/profile",
+    requestOptions)
         
-    } catch(err){
-        console.error(err)
-    }
+  
 }
 
-
+export async function updateUserData(token, firstName, lastName){
+    const options = {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ firstName, lastName }),
+    };
+  
+    const response = await fetch(
+        "http://localhost:3001/api/v1/user/profile",
+        options
+    )
+    return response
+        
+}
 // export function authHeader() {
 //     // return authorization header with jwt token
 //     let user = JSON.parse(localStorage.getItem('user'));
