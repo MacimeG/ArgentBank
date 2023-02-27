@@ -1,42 +1,49 @@
-import { useState } from "react";
-import { useDispatch } from 'react-redux'
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
 import { DATAUSER } from "../store";
 import argentBankLogo from '../assets/argentBankLogo.png'
 import { userFetchData } from "../utils/services";
-import { store } from "../store";
 
 export default function Navbar(){
+  const stateToken = useSelector((state) => state.token)
+
   const token = localStorage.getItem('token')
+
+
   const dispatch = useDispatch()
   const [userData, setUserData] = useState()
-  // const tokenUser = useSelector((state) => state.token)
-  // console.log(tokenUser)
-  const state = store.getState()
-  // console.log(state)
+
   
   function cleanStorage(){
     localStorage.clear()
     sessionStorage.clear()
+    window.reload()
   }
 
-  
-  if(state.token){
-    userFetchData(state.token).then(response => response.json())
-    .then(data => {
-        dispatch(DATAUSER(data.body)); 
-        setUserData(data.body)
-    })
+  useEffect(() =>{
+    if(stateToken){
+        userFetchData(stateToken).then(response => response.json())
+        .then(data => {
+            dispatch(DATAUSER(data.body)); 
+            setUserData(data.body)
+            console.log(data.body)
+        }).catch(error => {
+          console.log(error)
+        })
 
-  } else if(token){
-  userFetchData(token).then(response => response.json())
-  .then(data => {
-      dispatch(DATAUSER(data.body)); 
-      setUserData(data.body)
-  })
-}
+    }
+    else if(token){
+        userFetchData(token).then(response => response.json())
+        .then(data => {
+            dispatch(DATAUSER(data.body)); 
+          setUserData(data.body)
+        })
+    }
     // console.log(userData)
-    return token && userData ?(
+  }, [])
+    // console.log(userData)
+    return (stateToken  && userData) || (token && userData) ?(
         //changé les balise <a> par <link>
         <nav className="main-nav">
             {/* link vers cette meme page */}
