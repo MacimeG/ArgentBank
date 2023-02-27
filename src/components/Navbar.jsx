@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
@@ -40,13 +41,9 @@ export default function Navbar(){
           setUserData(data.body)
         })
     }
-    // console.log(userData)
   }, [])
-    // console.log(userData)
     return (stateToken  && userData) || (token && userData) ?(
-        //changé les balise <a> par <link>
         <nav className="main-nav">
-            {/* link vers cette meme page */}
         <Link className="main-nav-logo" to="/">
           <img
             className="main-nav-logo-image"
@@ -68,7 +65,6 @@ export default function Navbar(){
       </nav> 
       ) :(
         <div>
-            {/* link vers la page de connexion */}
             <nav className="main-nav">
       <Link to="/" className="main-nav-logo">
         <img

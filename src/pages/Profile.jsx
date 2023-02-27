@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { updateUserData, userFetchData } from "../utils/services";
@@ -56,6 +57,8 @@ export default function Profile(){
           .then(data => {
               dispatch(DATAUSER(data.body)); 
             setUserData(data.body)
+          }).catch(error => {
+            console.log(error)
           })
       }
     }, [])

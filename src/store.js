@@ -42,6 +42,14 @@ function reducer(state = initialState, action) {
             user: action.payload.user,
         }
     }
+    if(action.type === "UPDATEUSER"){
+      return{
+        ...state,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName 
+
+      }
+    }
     return state
 }
 
