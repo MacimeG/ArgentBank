@@ -19,6 +19,7 @@ You may also see any lint errors in the console.
 * NodeJs
 * MongoDB
 * React Redux
+* React-router-dom
 
 The back-end of application is available at https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API
 
