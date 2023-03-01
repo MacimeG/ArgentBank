@@ -29,13 +29,11 @@ export default function Profile(){
       if(stateToken){
         updateUserData(stateToken, userName, userLastName).then(response => response.json()).then(response => {
           dispatch(UPDATEUSER(response.body.firstName, response.body.lastName))
-          console.log("response",response);
         })
       }
       else if(token){
         updateUserData(token, userName, userLastName).then(response => response.json()).then(response => {
           dispatch(UPDATEUSER(response.body.firstName, response.body.lastName))
-          console.log("response",response);
         })
       }
       setIsEdit(false)
@@ -46,7 +44,6 @@ export default function Profile(){
           .then(data => {
               dispatch(DATAUSER(data.body)); 
               setUserData(data.body)
-              console.log(data.body)
           }).catch(error => {
             console.log(error)
           })
