@@ -23,4 +23,3 @@ You may also see any lint errors in the console.
 The back-end of application is available at https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API
 
 * Start the backend on port 3000: npm run dev:server
-* Start the frontend on port 3001: npm start
