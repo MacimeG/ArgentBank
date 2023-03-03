@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
-import { DATAUSER } from "../store";
+import { DATAUSER, SIGNOUT } from "../store";
 import argentBankLogo from '../assets/argentBankLogo.png'
 import { userFetchData } from "../utils/services";
 
@@ -19,7 +19,9 @@ export default function Navbar(){
   function cleanStorage(){
     localStorage.clear()
     sessionStorage.clear()
+    dispatch(SIGNOUT())
     window.reload()
+
   }
 
   useEffect(() =>{

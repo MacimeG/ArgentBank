@@ -24,6 +24,9 @@ export const UPDATEUSER = (firstName, lastName) =>({
     type: "UPDATEUSER",
     payload: {firstName, lastName}
 })
+export const SIGNOUT = () =>({
+    type: "SIGNOUT"
+})
 
 // le reducer, qui prends le state, et une action (qu'il ne connais pas a l'avance)
 function reducer(state = initialState, action) {
@@ -48,6 +51,11 @@ function reducer(state = initialState, action) {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName 
 
+      }
+    }
+    if(action.type === "SIGNOUT"){
+      return{
+        ...state
       }
     }
     return state
