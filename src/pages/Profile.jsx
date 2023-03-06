@@ -29,11 +29,15 @@ export default function Profile(){
       if(stateToken){
         updateUserData(stateToken, userName, userLastName).then(response => response.json()).then(response => {
           dispatch(UPDATEUSER(response.body.firstName, response.body.lastName))
+          dispatch(DATAUSER(response.body))
+          setUserData({firstName: response.body.firstName, lastName: response.body.lastName })
         })
       }
       else if(token){
         updateUserData(token, userName, userLastName).then(response => response.json()).then(response => {
           dispatch(UPDATEUSER(response.body.firstName, response.body.lastName))
+          dispatch(DATAUSER(response.body))
+          setUserData({firstName: response.body.firstName, lastName: response.body.lastName })
         })
       }
       setIsEdit(false)
@@ -113,12 +117,14 @@ export default function Profile(){
         <h1>Welcome back<br />{userData?.firstName} {userData?.lastName} !</h1>
         <form className="formEditUser" >
       <label htmlFor="firstName"></label>
-      <input type="text" defaultValue={userData?.firstName} id="firstName" onChange={(e) => setUserName(e.target.value)} ></input>
+      <input type="text" defaultValue={userData?.firstName} className="edit-input" id="firstName" onChange={(e) => setUserName(e.target.value)} ></input>
       <label htmlFor="lastName"></label>
-      <input type="text" defaultValue={userData?.lastName} id="lastName" onChange={(e) => setUserLast(e.target.value)}></input>
+      <input type="text" defaultValue={userData?.lastName} className="edit-input" id="lastName" onChange={(e) => setUserLast(e.target.value)}></input>
         </form>
+        <div className="button-container">
         <button className="edit-button"onClick={handleUserEdit}>Valide</button>
         <button className="edit-button" onClick={handleCancelEdit} >Cancel</button>
+        </div>
       </div>
       <h2 className="sr-only">Accounts</h2>
       <section className="account">

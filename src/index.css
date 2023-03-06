@@ -262,7 +262,19 @@ body {
   font-weight: bold;
   padding: 10px;
 }
-
+#firstName{
+  margin-right: 17px;
+}
+#lastName{
+  margin-right: 5px;
+}
+.button-container{
+  display: flex;
+  width: 10.9%;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+}
 .header {
   color: #fff;
   margin-bottom: 2rem;
