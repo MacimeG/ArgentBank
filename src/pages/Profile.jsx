@@ -65,7 +65,7 @@ export default function Profile(){
       }
     }, [])
 
-    if(!token){
+    if(!token || !stateToken){
       return <Navigate to="/SignIn"/>
     }
 
