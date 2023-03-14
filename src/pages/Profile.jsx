@@ -65,10 +65,6 @@ export default function Profile(){
       }
     }, [])
 
-    if(!token || !stateToken){
-      return <Navigate to="/SignIn"/>
-    }
-
         return !isEdit ? (
             <div>
             <Navbar/>
