@@ -31,7 +31,7 @@ export default function SignIn(){
         localStorage.setItem("token",response.body.token)
         localStorage.setItem("email",email)
       }
-      navigate('/Profile')
+      navigate('/Profile:token')
     })
   }
 

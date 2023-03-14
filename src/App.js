@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/SignIn' element={<SignIn/>}/>
-          <Route path='/Profile' element={<Profile/>}/>
+          <Route path='/Profile:token' element={<Profile/>}/>
         </Routes>
       </BrowserRouter>
     </div>
