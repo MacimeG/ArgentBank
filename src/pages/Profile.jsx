@@ -5,7 +5,6 @@ import { updateUserData, userFetchData } from "../utils/services";
 import { DATAUSER, UPDATEUSER } from "../store";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
 
 
 
