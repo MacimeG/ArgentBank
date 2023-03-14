@@ -17,7 +17,7 @@ export default function SignIn(){
   const token = localStorage.getItem('token')
   
   if(token){
-    navigate('/Profile')
+    navigate('/Profile:token')
   }
 
   const handleSubmit = (e)=>{
