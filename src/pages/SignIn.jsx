@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { AUTHENTICATED } from "../store";
 import { useNavigate } from "react-router-dom";
-
+import '../style/signIn.css'
 
 export default function SignIn(){
   const [email, setEmail] = useState('')
@@ -17,7 +17,7 @@ export default function SignIn(){
   const token = localStorage.getItem('token')
   
   if(token){
-    navigate('/Profile:token')
+    navigate('/Profile')
   }
 
   const handleSubmit = (e)=>{
@@ -31,8 +31,11 @@ export default function SignIn(){
         localStorage.setItem("token",response.body.token)
         localStorage.setItem("email",email)
       }
-      navigate('/Profile:token')
+      navigate('/Profile')
+    }).catch(error =>{
+      alert('veuillez entrer de bonnes infos')
     })
+
   }
 
   return(

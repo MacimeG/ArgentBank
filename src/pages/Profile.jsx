@@ -5,18 +5,21 @@ import { updateUserData, userFetchData } from "../utils/services";
 import { DATAUSER, UPDATEUSER } from "../store";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function Profile(){
     const stateToken = useSelector((state) => state.token)
     const token = localStorage.getItem('token')
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
     const [userData, setUserData] = useState(null)
     const [isEdit, setIsEdit] = useState(false)
     const [userName, setUserName]= useState('')
     const [userLastName, setUserLast] = useState('')
+
 
     function handleEdit(){
       setIsEdit(true)
@@ -61,6 +64,9 @@ export default function Profile(){
           }).catch(error => {
             console.log(error)
           })
+      }
+      else{
+        navigate("/SignIn")
       }
     }, [])
 
